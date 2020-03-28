@@ -1,0 +1,176 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+:root {
+  --light-bg: #fff;
+  --dark-bg: #323232;
+  --light-bg-font-color: #000;
+  --dark-bg-font-color: #fff;
+  --page-padding: 1em;
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: sans;
+  font-weight: bold;
+}
+
+@media(max-width: 700px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+}
+
+body {
+  background-color: var(--light-bg);
+  color: var(--light-bg-font-color);
+}
+
+.formContainer {
+  background-color: var(--dark-bg);
+  color: var(--dark-bg-font-color);
+  box-shadow: 5px 6px 12px -3px rgba(0,0,0,0.75);
+  padding: 2em;
+}
+
+.rollForm {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 1em;
+}
+
+.flexchild {
+  flex-grow: 1;
+  height: calc(100vh - 2 * var(--page-padding));
+  width: calc(50vw - 2 * var(--page-padding));
+}
+
+@media(max-width: 700px) {
+  .flexchild {
+    height: calc(50vh - 2 * var(--page-padding));
+    width: calc(100vw - 2 * var(--page-padding));
+  }
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+
+  padding: 1em;
+}
+
+@media(max-width: 700px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+.rollForm > label {
+  font-size: 15pt;
+  font-weight: bold;
+  margin-bottom: 1.5em;
+  font-family: sans;
+}
+
+.rollForm > input {
+  font-size: 15pt;
+  margin-bottom: 2.5em;
+  padding: 1em;
+  border: 2px solid var(--dark-bg-font-color);
+  background-color: var(--dark-bg);
+  color: var(--dark-bg-font-color);
+}
+
+@media(max-width: 700px) {
+  .rollForm > input {
+    font-size: 10pt;
+    margin-bottom: 1.5em;
+    padding: 0.5em;
+  }
+  .rollForm > label {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+}
+
+.rollForm > input:focus {
+  border: 2px solid var(--light-bg-font-color);
+  background-color: var(--light-bg);
+  color: var(--light-bg-font-color);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--dark-bg);
+  border: 1px solid var(--dark-bg-font-color);
+  color: var(--dark-bg-font-color);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20pt;
+}
+
+button:hover {
+  background-color: var(--light-bg);
+  color: var(--light-bg-font-color);
+}
+
+#diceLog {
+  overflow-y: auto;
+  padding: 2em;
+  font-family: sans-serif;
+}
+
+#diceLog > p {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+* {
+  transition: all 0.2s ease;
+}
+
