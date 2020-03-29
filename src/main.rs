@@ -32,8 +32,10 @@ async fn main() {
         warp::sse::reply(warp::sse::keep_alive().stream(stream))
     });
 
+    // add static file delivery for js and css files
     let static_files = warp::path("static").and(warp::fs::dir("./static"));
 
+    // serve the static html for the index route
     let index = warp::get()
         .and(warp::path::end())
         .and(warp::fs::file("./static/index.html"));
@@ -81,7 +83,9 @@ fn user_connected(
 fn user_dice_roll(char_name: String, dice_sides: usize, users: &Users) {
     let mut rng = thread_rng();
     let roll_result = rng.gen_range(1, dice_sides);
+    // sanitize the username input to prevent XSS
     let sanitized_name = ammonia::clean(char_name.as_str());
+    // construct a JSON response
     let response = format!("{{ \"name\": \"{}\", \"roll_result\": {} }}", sanitized_name, roll_result);
     println!("{}", &response);
 
