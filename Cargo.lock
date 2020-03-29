@@ -67,6 +67,7 @@ dependencies = [
  "bytes",
  "futures",
  "log 0.4.8",
+ "percent-encoding",
  "pretty_env_logger",
  "rand 0.7.3",
  "tokio",

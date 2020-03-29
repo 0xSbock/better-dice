@@ -7,6 +7,7 @@ use std::sync::{
 use tokio::sync::mpsc;
 use warp::{sse::ServerSentEvent, Filter};
 use rand::{thread_rng, Rng};
+use percent_encoding::percent_decode;
 use ammonia;
 
 static NEXT_USER_ID: AtomicUsize = AtomicUsize::new(1);
@@ -83,8 +84,10 @@ fn user_connected(
 fn user_dice_roll(char_name: String, dice_sides: usize, users: &Users) {
     let mut rng = thread_rng();
     let roll_result = rng.gen_range(1, dice_sides);
+    // names could be url encoded (e.g. "name%20surname")
+    let url_decoded_name = percent_decode(&char_name.as_bytes()).decode_utf8().unwrap();
     // sanitize the username input to prevent XSS
-    let sanitized_name = ammonia::clean(char_name.as_str());
+    let sanitized_name = ammonia::clean(&url_decoded_name);
     // construct a JSON response
     let response = format!("{{ \"name\": \"{}\", \"roll_result\": {} }}", sanitized_name, roll_result);
     println!("{}", &response);
