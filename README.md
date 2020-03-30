@@ -15,5 +15,5 @@ Backend is written in Rust with [warp](https://docs.rs/warp/0.2.2/warp/).
 
 ## Getting Started
 [Install rust](https://www.rust-lang.org/tools/install) and its tooling if you didn't already.
-Clone the repository and just run `cargo run --release`.
+Clone the repository and run `cargo run --release`.
 
