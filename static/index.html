@@ -6,37 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/main.css">
   </head>
-    <body>
-      <div class="container">
-        <div class="flexchild formContainer">
-          <h1>Better Dice</h1>
-          <div class="rollForm">
-            <label for="charname">Character name</label>
-            <input
-              type="text"
-              id="charname"
-              title="Enter the name of your pen and paper character."
-              required />
-            <label for="dicesides">Number of dice sides</label>
-            <input 
-              type="number"
-              value="20"
-              min="1"
-              id="dicesides"
-              pattern="\d+"
-              title="Please enter the number of sides of your dice."
-              required/>
-            <div class="btn-container">
-              <button class="btn" type="button" id="send">
-                Roll
-                <div id="diceSVG"></div>
-              </button>
-            </div>
+  <body>
+    <div class="container">
+      <div class="flexchild formContainer">
+        <h1>Better Dice</h1>
+        <div class="rollForm">
+          <label for="charname">Character name</label>
+          <input
+            type="text"
+            id="charname"
+            title="Enter the name of your pen and paper character."
+            required />
+          <label for="dicesides">Number of dice sides</label>
+          <input 
+            type="number"
+            value="20"
+            min="1"
+            id="dicesides"
+            pattern="\d+"
+            title="Please enter the number of sides of your dice."
+            required/>
+          <div class="btn-container">
+            <button class="btn" type="button" id="send">
+              Roll
+              <div id="diceSVG"></div>
+            </button>
           </div>
         </div>
-        <div id="diceLog" class="flexchild">
-        </div>
       </div>
-      <script src="static/main.js"></script>
-    </body>
+      <div id="diceLog" class="flexchild">
+      </div>
+    </div>
+    <script src="static/main.js"></script>
+  </body>
 </html>
