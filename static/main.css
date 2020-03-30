@@ -141,7 +141,7 @@ body {
   align-items: center;
 }
 
-button {
+.btn {
   display: flex;
   align-items: center;
 
@@ -156,12 +156,12 @@ button {
   font-size: 2rem;
 }
 
-button:hover {
+.btn:hover {
   background-color: var(--light-bg);
   color: var(--light-bg-font-color);
 }
 
-button:hover #diceSVG {
+.btn:hover #diceSVG {
   filter: invert(0%);
 }
 
