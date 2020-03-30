@@ -1,6 +1,7 @@
 # Better Dice
 A simple **synchronized** dice roll service for online pen and paper players.
 
+![Preview of the better dice interface](preview.png)
 ## Why?
 Recently i played my first round of online pen and paper.
 Most of the time the person rolling the dice shared the screen while rolling the dice to "proof" the result.
@@ -12,7 +13,7 @@ For a minimal Javascript footprint, [Server Sent Events (SSE)](https://developer
 
 Backend is written in Rust with [warp](https://docs.rs/warp/0.2.2/warp/).
 
-## Preview
+## Getting Started
+[Install rust](https://www.rust-lang.org/tools/install) and its tooling if you didn't already.
+Clone the repository and just run `cargo run --release`.
 
-
-![Preview of the better dice interface](preview.png)
