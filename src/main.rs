@@ -4,6 +4,7 @@ use std::sync::{
     atomic::{AtomicUsize, Ordering},
     Arc, Mutex,
 };
+use std::cmp;
 use tokio::sync::mpsc;
 use warp::{sse::ServerSentEvent, Filter};
 use rand::{thread_rng, Rng};
@@ -100,7 +101,7 @@ fn user_connected(
 
 fn user_dice_roll(char_name: String, dice_sides: usize, users: &Users) {
     let mut rng = thread_rng();
-    let roll_result = rng.gen_range(1, dice_sides);
+    let roll_result = rng.gen_range(1, cmp::max(2, dice_sides+1));
     // names could be url encoded (e.g. "name%20surname")
     let url_decoded_name = percent_decode(&char_name.as_bytes()).decode_utf8().unwrap();
     // sanitize the username input to prevent XSS
