@@ -9,12 +9,27 @@ use warp::{sse::ServerSentEvent, Filter};
 use rand::{thread_rng, Rng};
 use percent_encoding::percent_decode;
 use ammonia;
+use structopt::StructOpt;
+
+#[derive(Debug, StructOpt)]
+#[structopt(name = "better-dice", about = "a simple synchronized dice rolling site")]
+struct Opt {
+    /// Port
+    #[structopt(short, long, default_value = "3030")]
+    port: u16,
+
+    /// Public hosting
+    #[structopt(long)]
+    public: bool
+}
 
 static NEXT_USER_ID: AtomicUsize = AtomicUsize::new(1);
 type Users = Arc<Mutex<HashMap<usize, mpsc::UnboundedSender<Message>>>>;
 
 #[tokio::main]
 async fn main() {
+    let opt = Opt::from_args();
+
     let users = Arc::new(Mutex::new(HashMap::new()));
     let users = warp::any().map(move || users.clone());
 
@@ -42,7 +57,11 @@ async fn main() {
         .and(warp::fs::file("./static/index.html"));
 
     let routes = index.or(static_files).or(rolls_recv).or(roll_send);
-    warp::serve(routes).run(([127, 0, 0, 1], 3030)).await;
+    if opt.public {
+        warp::serve(routes).run(([0, 0, 0, 0], opt.port)).await;
+    } else {
+        warp::serve(routes).run(([127, 0, 0, 1], opt.port)).await;
+    }
 }
 
 /// Message variants.
@@ -59,8 +78,6 @@ fn user_connected(
 {
     // Use a counter to assign a new unique ID for this user.
     let my_id = NEXT_USER_ID.fetch_add(1, Ordering::Relaxed);
-
-    eprintln!("new chat user: {}", my_id);
 
     // Use an unbounded channel to handle buffering and flushing of messages
     // to the event source...
@@ -90,7 +107,6 @@ fn user_dice_roll(char_name: String, dice_sides: usize, users: &Users) {
     let sanitized_name = ammonia::clean(&url_decoded_name);
     // construct a JSON response
     let response = format!("{{ \"name\": \"{}\", \"roll_result\": {} }}", sanitized_name, roll_result);
-    println!("{}", &response);
 
     // We use `retain` instead of a for loop so that we can reap any user that
     // appears to have disconnected.
