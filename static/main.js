@@ -8,7 +8,7 @@ function roll(data) {
   console.log(data);
   var dice_roll = JSON.parse(data);
   var line = document.createElement('p');
-  line.innerText = dice_roll.name + ' rolled a ' + dice_roll.roll_result;
+  line.innerText = dice_roll.name + ' rolled a ' + dice_roll.roll_result + ' (W' + dice_roll.dice_sides + ')';
   diceLog.insertBefore(line, diceLog.firstChild);
 }
 

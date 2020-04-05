@@ -107,7 +107,7 @@ fn user_dice_roll(char_name: String, dice_sides: usize, users: &Users) {
     // sanitize the username input to prevent XSS
     let sanitized_name = ammonia::clean(&url_decoded_name);
     // construct a JSON response
-    let response = format!("{{ \"name\": \"{}\", \"roll_result\": {} }}", sanitized_name, roll_result);
+    let response = format!("{{ \"name\": \"{}\", \"dice_sides\": {}, \"roll_result\": {} }}", sanitized_name, cmp::max(2, dice_sides), roll_result);
 
     // We use `retain` instead of a for loop so that we can reap any user that
     // appears to have disconnected.
